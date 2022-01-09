@@ -1,47 +1,47 @@
 package examservice.service;
 
 import examservice.domain.Question;
+import examservice.repository.MathQuestionRepository;
 import examservice.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Random;
 
-
 @Service
-public class JavaQuestionService implements QuestionService{
+public class MathQuestionService implements QuestionService {
 
-    private final QuestionRepository repository;
+    private final MathQuestionRepository mathRepository;
 
-    public JavaQuestionService(QuestionRepository repository) {
-        this.repository = repository;
+    public MathQuestionService(MathQuestionRepository mathRepository) {
+        this.mathRepository = mathRepository;
     }
 
     @Override
     public Question add(String question, String answer) {
-        return repository.add(question, answer);
+        return mathRepository.add(question, answer);
     }
 
     @Override
     public Question add(Question question) {
-        repository.add(question);
+        mathRepository.add(question);
         return question;
     }
 
     @Override
     public Question remove(Question question) {
-        repository.remove(question);
+        mathRepository.remove(question);
         return question;
     }
 
     @Override
     public Collection<Question> getAll() {
-        return repository.getAll();
+        return mathRepository.getAll();
     }
 
     @Override
     public Question getRandomQuestion() {
         Random random = new Random();
-       return repository.getAll().stream().skip(random.nextInt(repository.size())).findFirst().orElse(null);
+        return mathRepository.getAll().stream().skip(random.nextInt(mathRepository.size())).findFirst().orElse(null);
     }
 }

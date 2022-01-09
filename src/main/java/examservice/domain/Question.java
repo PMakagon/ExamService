@@ -2,9 +2,10 @@ package examservice.domain;
 
 import java.util.Objects;
 
+
 public class Question  {
-    String question;
-    String answer;
+    private final String question;
+    private final String answer;
 
 
     public Question(String question, String answer) {
@@ -12,12 +13,12 @@ public class Question  {
         this.answer = answer;
     }
 
-    String getQuestion(){
-        return null;
+    public String getQuestion(){
+        return question;
     }
 
-    String getAnswer(){
-        return null;
+    public String getAnswer(){
+        return answer;
     }
 
     @Override
