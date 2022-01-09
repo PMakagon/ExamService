@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam")
+@RequestMapping("/exam/math")
 public class MathQuestionController {
 
     private final MathQuestionService mathQuestionService;
@@ -20,17 +20,17 @@ public class MathQuestionController {
         this.mathQuestionService = mathQuestionService;
     }
 
-    @GetMapping("/admin/add")
+    @GetMapping("/add")
     public Question addQuestion(@RequestParam String question, @RequestParam String answer){
         return mathQuestionService.add(question,answer);
     }
 
-    @GetMapping("/admin/get")
+    @GetMapping("/get")
     public Collection<Question> getQuestions(){
         return mathQuestionService.getAll();
     }
 
-    @GetMapping("/admin/remove")
+    @GetMapping("/remove")
     public Question removeQuestion(@RequestParam String question,@RequestParam String answer){
         return mathQuestionService.remove(new Question(question,answer));
     }

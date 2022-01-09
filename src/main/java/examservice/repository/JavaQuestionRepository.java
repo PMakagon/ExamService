@@ -2,6 +2,7 @@ package examservice.repository;
 
 import examservice.domain.Question;
 import examservice.exceptions.QuestionNotFoundException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import java.util.HashSet;
 
 
 @Repository
+@Primary
 public class JavaQuestionRepository implements QuestionRepository{
 
     private final HashSet<Question> questions =new HashSet<>();
