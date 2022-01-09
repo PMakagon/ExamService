@@ -15,7 +15,7 @@ public class JavaQuestionController {
 //    http://localhost:8080/exam/java/add?question=a&answer=b
 //    http://localhost:8080/exam/java/add1?question=a
 //    http://localhost:8080/exam/math/get
-//    http://localhost:8080/exam/get
+//    http://localhost:8080/exam/get?amount=8
 
     private final QuestionService questionService;
 

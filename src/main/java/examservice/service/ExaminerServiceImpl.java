@@ -39,7 +39,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     @Override
     public Collection<Question> getQuestions(int amount) {
         ArrayList<Question> questionsList = new ArrayList<>();
-        if(questionService.getAll().size()+mathQuestionService.getAll().size()<amount){
+        if(questionService.getAll().size()+mathQuestionService.getAll().size()<amount || amount<0){
             throw new QuestionAmountException();
         }
         Random random = new Random();
