@@ -3,7 +3,7 @@ package examservice.domain;
 import java.util.Objects;
 
 
-public class Question  {
+public class Question {
     private final String question;
     private final String answer;
 
@@ -13,11 +13,11 @@ public class Question  {
         this.answer = answer;
     }
 
-    public String getQuestion(){
+    public String getQuestion() {
         return question;
     }
 
-    public String getAnswer(){
+    public String getAnswer() {
         return answer;
     }
 

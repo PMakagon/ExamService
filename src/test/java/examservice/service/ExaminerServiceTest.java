@@ -25,6 +25,6 @@ public class ExaminerServiceTest {
 
         when(questionServiceMock.getRandomQuestion())
                 .thenReturn(CORRECT_QUESTION);
-                assertEquals(CORRECT_COLLECTION,out.getQuestions(CORRECT_AMOUNT));
+        assertEquals(CORRECT_COLLECTION, out.getQuestions(CORRECT_AMOUNT));
     }
 }

@@ -45,7 +45,7 @@ public class JavaQuestionServiceTest {
     public void shouldReturnCorrectCollection() {
         when(repositoryMock.getAll())
                 .thenReturn(CORRECT_COLLECTION);
-        assertIterableEquals(CORRECT_COLLECTION, out.getAll());
+        assertEquals(CORRECT_COLLECTION, out.getAll());
     }
 
 }

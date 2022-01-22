@@ -9,26 +9,27 @@ import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 
 @Repository
 @Primary
-public class JavaQuestionRepository implements QuestionRepository{
+public class JavaQuestionRepository implements QuestionRepository {
 
-    private final HashSet<Question> questions =new HashSet<>();
+    private final Set<Question> questions = new HashSet<>();
 
     @PostConstruct
-    public void init (){
-        add("a","a");
-        add("b","b");
-        add("c","c");
-        add("d","d");
+    public void init() {
+        add("a", "a");
+        add("b", "b");
+        add("c", "c");
+        add("d", "d");
         System.out.println("на месте");
     }
 
     @Override
     public Question add(String question, String answer) {
-        Question element = new Question(question,answer);
+        Question element = new Question(question, answer);
         questions.add(element);
         return element;
     }

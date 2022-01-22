@@ -12,10 +12,12 @@ import java.util.Random;
 @Service
 public class MathQuestionService implements QuestionService {
 
-    private final MathQuestionRepository mathRepository;
+    private final QuestionRepository mathRepository;
+    private final Random random;
 
-    public MathQuestionService(MathQuestionRepository mathRepository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository mathRepository) {
         this.mathRepository = mathRepository;
+        this.random = new Random();
     }
 
     @Override
@@ -25,14 +27,12 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-        mathRepository.add(question);
-        return question;
+        return mathRepository.add(question);
     }
 
     @Override
     public Question remove(Question question) {
-        mathRepository.remove(question);
-        return question;
+        return mathRepository.remove(question);
     }
 
     @Override
@@ -42,7 +42,9 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        Random random = new Random();
-        return mathRepository.getAll().stream().skip(random.nextInt(mathRepository.size())).findFirst().orElse(null);
+        return mathRepository.getAll().stream()
+                .skip(random.nextInt(mathRepository.size()))
+                .findFirst()
+                .orElseThrow();
     }
 }

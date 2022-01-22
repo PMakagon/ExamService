@@ -5,19 +5,21 @@ import examservice.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-
 import java.util.Collection;
 import java.util.Random;
 
 
 @Service
 @Primary
-public class JavaQuestionService implements QuestionService{
+public class JavaQuestionService implements QuestionService {
 
     private final QuestionRepository repository;
+    private final Random random;
 
-    public JavaQuestionService(QuestionRepository repository) {
+
+    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository repository) {
         this.repository = repository;
+        this.random = new Random();
     }
 
     @Override
@@ -27,14 +29,12 @@ public class JavaQuestionService implements QuestionService{
 
     @Override
     public Question add(Question question) {
-        repository.add(question);
-        return question;
+        return repository.add(question);
     }
 
     @Override
     public Question remove(Question question) {
-        repository.remove(question);
-        return question;
+        return repository.remove(question);
     }
 
     @Override
@@ -44,7 +44,9 @@ public class JavaQuestionService implements QuestionService{
 
     @Override
     public Question getRandomQuestion() {
-        Random random = new Random();
-       return repository.getAll().stream().skip(random.nextInt(repository.size())).findFirst().orElse(null);
+        return repository.getAll().stream()
+                .skip(random.nextInt(repository.size()))
+                .findFirst()
+                .orElseThrow();
     }
 }

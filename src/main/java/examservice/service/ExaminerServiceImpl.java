@@ -2,6 +2,7 @@ package examservice.service;
 
 import examservice.domain.Question;
 import examservice.exceptions.QuestionAmountException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,44 +13,28 @@ public class ExaminerServiceImpl implements ExaminerService {
     private final QuestionService questionService;
     private final QuestionService mathQuestionService;
     private final List<QuestionService> services ;
+    private final Random random;
 
-    public ExaminerServiceImpl(QuestionService questionService, QuestionService mathQuestionService, List<QuestionService> services) {
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService questionService,@Qualifier("mathQuestionService") QuestionService mathQuestionService, List<QuestionService> services) {
         this.questionService = questionService;
         this.mathQuestionService = mathQuestionService;
         this.services = services;
+        this.random = new Random();
     }
 
 
-//    @Override
-//    public Collection<Question> getQuestions(int amount) {
-//        ArrayList<Question> questionsList = new ArrayList<>(amount);
-//        if(questionServices.getAll().size()+mathQuestionService.getAll().size()<amount){
-//            throw new QuestionAmountException();
-//        }
-//        while (amount>0){
-//            Question questionToAdd = questionServices.getRandomQuestion();
-//            if(!questionsList.contains(questionToAdd)){
-//                questionsList.add(questionToAdd);
-//                amount--;
-//            }
-//        }
-//        return Collections.unmodifiableCollection(questionsList);
-//    }
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        ArrayList<Question> questionsList = new ArrayList<>();
+       Set<Question> questionsToReturn = new HashSet<>();
         if(questionService.getAll().size()+mathQuestionService.getAll().size()<amount || amount<0){
             throw new QuestionAmountException();
         }
-        Random random = new Random();
-        while (amount>0){
+
+        while (questionsToReturn.size()<amount){
            Question questionToAdd = services.get(random.nextInt(services.size())).getRandomQuestion();
-            if(!questionsList.contains(questionToAdd)) {
-                questionsList.add(questionToAdd);
-                amount--;
-            }
+           questionsToReturn.add(questionToAdd);
         }
-        return Collections.unmodifiableCollection(questionsList);
+        return Collections.unmodifiableCollection(questionsToReturn);
     }
 }
